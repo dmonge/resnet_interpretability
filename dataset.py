@@ -1,3 +1,6 @@
+"""
+Shapes dataset.
+"""
 from itertools import product
 
 import torch
@@ -14,12 +17,11 @@ POSITIONS = ['top-left', 'top-right', 'bottom-left', 'bottom-right']
 class ShapeDataset(Dataset):
     """Dataset class for shapes."""
 
-    def __init__(self, image_size=64, transform=None, target_to_ohe=False, augmentation_transform=None, n_augmentations=8, device=None):
+    def __init__(self, image_size=64, transform=None, augmentation_transform=None, n_augmentations=8, device=None):
         self.image_size = image_size
+        self.targets_info = []
         self.images = []
         self.targets = []
-        self.targets_ohe = []
-        self.target_to_ohe = target_to_ohe
 
         if transform is None:
           transform = ToTensor()
@@ -27,36 +29,31 @@ class ShapeDataset(Dataset):
         _eye = torch.eye(len(list(product(SHAPES, COLORS, [True, False], POSITIONS))))
         for class_id, (shape, color, fill, position) in enumerate(product(SHAPES, COLORS, [True, False], POSITIONS)):
             img = generate_shape_image(shape=shape, color=color, fill=fill, position=position, image_size=image_size)
-            _target_dict = dict(shape=shape, color=color, fill=fill, position=position)
+            _target_info = dict(shape=shape, color=color, fill=fill, position=position)
             _target_ohe = _eye[class_id]
             self.images.append(transform(img))
-            self.targets.append(_target_dict)
-            self.targets_ohe.append(_target_ohe)
+            self.targets_info.append(_target_info)
+            self.targets.append(_target_ohe)
 
             if augmentation_transform is not None:
               for _ in range(n_augmentations):
                   self.images.append(augmentation_transform(img))
-                  self.targets.append(_target_dict)
-                  self.targets_ohe.append(_target_ohe)
+                  self.targets.append(_target_ohe)
 
 
         self.images = torch.stack(self.images, dim=0)
-        if self.target_to_ohe:
-            self.targets_ohe = torch.stack(self.targets_ohe, dim=0)
+        self.targets = torch.stack(self.targets, dim=0)
 
         if device is not None:
             self.images.to(device)
-            if self.target_to_ohe:
-                self.targets_ohe.to(device)
+            self.targets.to(device)
             
 
     def __len__(self):
         return len(self.images)
 
     def __getitem__(self, idx):
-        x = self.images[idx]
-        y = self.targets_ohe[idx] if self.target_to_ohe else self.targets[idx]
-        return x, y
+        return self.images[idx], self.targets[idx]
 
 
 def generate_shape_image(shape, color, fill, position, image_size=64):
