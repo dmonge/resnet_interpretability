@@ -1,0 +1,9 @@
+pillow
+jupyterlab
+torchvision
+icecream
+transformers
+accelerate>=0.26.0
+torchmetrics
+pandas
+umap-learn
