@@ -9,6 +9,7 @@ from torch.nn import functional as F
 
 
 class Autoencoder(nn.Module):
+    """Autoencoder."""
 
     def __init__(self, n_activations, n_features):
         super(Autoencoder, self).__init__()
