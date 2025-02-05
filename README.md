@@ -24,13 +24,12 @@ Samples from the basic (left) and augmented (right) datasets.
 
 The analyzed model is a simple ResNet architecture for solving a multiclass classification task for the 96 types of images.
 
-Example of activations.
+Example of activations in the studied model.
 
 ![inspect_layer.png](resources/inspect_layer.png)
 
 Example of the features that can be found.
 Features are plotted based on color, shape type, and fill.
-Clusters regarding color and fill are more
 
 ![umap_color.png](resources/umap_color.png)
 
