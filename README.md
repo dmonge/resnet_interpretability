@@ -33,6 +33,7 @@ Features are plotted based on color, shape type, and fill.
 
 ![umap_color.png](resources/umap_color.png)
 
+Please, check `interpret_resnet.ipynb` for a more detailed explanation and results.
 
 ## Installation
 
