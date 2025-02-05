@@ -6,10 +6,10 @@ The autoencoder implementation and training is the same as in the paper.
 
 Unlike the mentioned paper, this repository does not apply these ideas on language models but in an image classification model.
 The classification task aims at discriminating images of shapes with the following attributes:
-- shape: circle, square, or triangle,
-- color: red, green, blue, or white,
-- fill: filled or empty,
-- position: top-left, top-right, bottom-left, or bottom-right.
+- `shape`: *circle*, *square*, or *triangle*,
+- `color`: *red*, *green*, *blue*, or *white*,
+- `fill`: *filled* or *empty*,
+- `position`: *top-left*, *top-right*, *bottom-left*, or *bottom-right*.
 
 These attributes aim at providing a space of features that are easy for humans to understand.
 Two study cases are defined:
@@ -29,7 +29,8 @@ Example of activations.
 ![inspect_layer.png](resources/inspect_layer.png)
 
 Example of the features that can be found.
-Clusters of
+Features are plotted based on color, shape type, and fill.
+Clusters regarding color and fill are more
 
 ![umap_color.png](resources/umap_color.png)
 
