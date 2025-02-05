@@ -4,7 +4,7 @@ This project aims are testing the interpretability approach discussed in the pap
 
 The autoencoder implementation and training is the same as in the paper.
 
-Unlike the mentioned paper, this repository does not apply these ideas on language models but in an image classification model.
+Unlike the mentioned paper, this repository focuses on interpretability of image classification model instead of language models.
 The classification task aims at discriminating images of shapes with the following attributes:
 - `shape`: *circle*, *square*, or *triangle*,
 - `color`: *red*, *green*, *blue*, or *white*,
